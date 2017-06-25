@@ -1,0 +1,71 @@
+var target = "mainFrame";
+
+module.exports = [{
+	title:'基础信息管理',
+	children:[{
+		title:'公司信息管理',
+		url:'systeminfo.do?method=view',
+		target:target
+	},{
+		title:'数据字典管理',
+		url:'dict.ftl',
+		target:target
+	},{
+		title:'菜单管理',
+		url:'menu.html',
+		target:target
+	},{
+		title:'权限组菜单管理',
+		url:'restrain_menu.html',
+		target:target
+	},{
+		title:'部门管理',
+		url:'department.ftl',
+		target:target
+	},{
+		title:'用户管理',
+		url:'user.ftl',
+		target:target
+	},{
+		title:'汇率管理',
+		url:'base/currency.ftl',
+		target:target
+	},{
+		title:'品牌管理',
+		url:'base/trademark.ftl',
+		target:target
+	}]
+},{
+	title:'合同模板管理',
+	children:[{
+		title:'合同模板管理',
+		url:'contact_template.mvc',
+		target:target
+	}]
+		
+},{
+		title:'外观设计',
+		children:[{
+			title:'头部设计',
+			url:'design/header.mvc',
+			target:target
+		},{
+			title:'印章上传',
+			url:'design/stamp.mvc',
+			target:target
+		}]
+	},{
+		title:'流程审批',
+		children:[{
+			title:'费用审批流程',
+			url:'proccess/expense.ftl',
+			target:target
+		}]
+	},{
+		title:'财务信息',
+		children:[{
+			title:'费用科目',
+			url:'finance/expense_account.ftl',
+			target:target
+		}]
+	}];
