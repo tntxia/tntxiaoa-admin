@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mvc>
+	<charset>UTF-8</charset>
+	<mvcList>
+		<include file="mvc-views.xml"></include>
+	</mvcList>
+	<actionlist>
+	
+		<action url="login.do">com.tntxia.web.login.LoginAction</action>
+		<action url="logout.do">com.tntxia.web.login.LogoutAction</action>
+		
+		<action name="appManage">com.tntxia.oa.admin.action.mvc.AppManageAction</action>
+		<action url="app.do">com.tntxia.oa.admin.action.AppAction</action>
+		<action name="showImage">com.tntxia.oa.admin.action.ShowImageAction</action>
+		
+		<action name="systeminfo">com.tntxia.oa.admin.action.SystemInfoAction</action>
+		<action url="organization.do">com.tntxia.oa.admin.action.OrganizationAction</action>
+		<action url="user.do">com.tntxia.oa.admin.action.UserAction</action>
+		<action url="dept.do">com.tntxia.oa.admin.action.DepartmentAction</action>
+		<action name="dict">com.tntxia.oa.admin.action.DictAction</action>
+		<action name="currency">com.tntxia.oa.admin.action.CurrencyAction</action>
+		<action name="menu">com.tntxia.oa.admin.action.MenuAction</action>
+		<action name="restrainMenu">com.tntxia.oa.admin.action.RestrainMenuAction</action>
+		<action name="expense_account">com.tntxia.oa.admin.action.ExpenseAccountAction</action>
+		
+		<!-- 流程管理 -->
+		<action url="proccess/expense.do">com.tntxia.oa.admin.action.ProccessExpenseAction</action>
+		<action url="proccess/prepaid.do">com.tntxia.oa.admin.action.ProccessPrepaidAction</action>
+		<action url="proccess/payment.do">com.tntxia.oa.admin.action.ProccessPaymentAction</action>
+		
+		<action name="trademark">com.tntxia.oa.admin.action.TrademarkAction</action>
+		<action name="static">com.tntxia.oa.admin.action.StaticAction</action>
+		
+		
+		<action name="design/header">com.tntxia.oa.admin.action.mvc.DesignHeaderAction</action>
+		<action url="design.do">com.tntxia.oa.admin.action.DesignAction</action>
+		<action name="design/header/do">com.tntxia.oa.admin.action.DesignHeaderAction</action>
+		
+		<action name="design/stamp">com.tntxia.oa.admin.action.mvc.DesignStampAction</action>
+		<action name="design/stamp/do">com.tntxia.oa.admin.action.DesignStampAction</action>
+		
+		<action url="contactTemplate.do">com.tntxia.oa.admin.action.ContactTemplateAction</action>
+		
+		<action url="config.do">com.tntxia.oa.admin.action.ConfigAction</action>
+		<action url="position.do">com.tntxia.oa.admin.action.PositionAction</action>
+		<action url="right.do">com.tntxia.oa.admin.action.RightAction</action>
+		<action url="rightGroup.do">com.tntxia.oa.admin.action.RightGroupAction</action>
+		<action url="restrain.do">com.tntxia.oa.admin.action.RestrainAction</action>
+		
+		<action url="modifyPass.do">com.tntxia.oa.admin.action.ModifyPassAction</action>
+		
+		<action url="choose.do">com.tntxia.oa.admin.action.FileChooseAction</action>
+		<action url="flowPurchasing.do">com.tntxia.oa.admin.action.FlowPurchasingAction</action>
+		
+		<action url="warehouse.do">com.tntxia.oa.admin.action.WarehouseAction</action>
+		<action url="company.do">com.tntxia.oa.admin.action.CompanyAction</action>
+		
+		<action url="notice.do">com.tntxia.oa.admin.action.NoticeAction</action>
+		
+		<action url="payway.do">com.tntxia.oa.admin.action.PaywayAction</action>
+		<action url="sale.do">com.tntxia.oa.admin.action.SaleAction</action>
+		
+		<action url="purchasing.do">com.tntxia.oa.admin.action.PurchasingAction</action>
+		
+		<action url="finance.do">com.tntxia.oa.admin.action.FinanceAction</action>
+		
+	</actionlist>
+	<action-mapping>
+		<dispatch url="appManage.mvc">appManage</dispatch>
+		
+		<dispatch url="systeminfo.do">systeminfo</dispatch>
+		<dispatch url="dict.do">dict</dispatch>
+		<dispatch url="currency.do">currency</dispatch>
+		<dispatch url="menu.do">menu</dispatch>
+		<dispatch url="restrainMenu.do">restrainMenu</dispatch>
+		<dispatch url="expense_account.do">expense_account</dispatch>
+		<dispatch url="trademark.do">trademark</dispatch>
+		<dispatch url="static.do">static</dispatch>
+		
+		<dispatch url="showImage.do">showImage</dispatch>
+		
+		<dispatch url="design/header.mvc">design/header</dispatch>
+		<dispatch url="design/header.do">design/header/do</dispatch>
+		
+		<dispatch url="design/stamp.mvc">design/stamp</dispatch>
+		<dispatch url="design/stamp.do">design/stamp/do</dispatch>
+		
+	</action-mapping>
+</mvc>

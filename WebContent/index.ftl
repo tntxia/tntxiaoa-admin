@@ -1,0 +1,67 @@
+
+<div class="navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <div class="navbar-title">OA 系统管理 相关链接:</div>
+      </div>
+      <div class="navbar-collapse collapse" role="navigation">
+        <ul class="nav navbar-nav">
+          <li><a href="/tntxiaoa/">OA管理</a></li>
+          <li><a href="https://github.com/tntxia/tntxiaoa-admin">Github</a></li>
+          <li><a href="#config">设置</a></li>
+          <li><a href="javascript:changePassword()">修改密码</a></li>
+          <li><a href="javascript:logout()">退出登陆</a></li>
+        </ul>
+      </div>
+    </div>
+</div>
+
+<div style="clear:both;"></div>
+
+<div class="bottom-div">
+	<div class="leftbar"></div>
+	<div id="mainPage" class="main-page"></div>
+</div> 
+
+<div class="modal fade" tabindex="-1" role="dialog" id="changePassModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">修改密码</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">密码</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" v-model="pass">
+						</div>
+
+					</div>
+				</div>
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">确认密码</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" v-model="passConfirm">
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" @click="updatePass">确认修改</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

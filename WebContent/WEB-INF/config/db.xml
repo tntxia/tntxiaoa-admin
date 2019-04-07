@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db>
+	<datasource name="default">
+		<jndi>java:comp/env/jdbc/oaSystem</jndi>
+	</datasource>
+	<datasource name="oa">
+		<url>jdbc:h2:tcp://webserver:9394/D:\oa_db\oa</url>
+		<user>sa</user>
+		<password>sa</password>
+		<driver>org.h2.Driver</driver>
+	</datasource>
+	<!-- 增加一个数据库，给原来的数据库减少压力  -->
+	<datasource name="oa_back">
+		<url>jdbc:h2:tcp://webserver:9394/D:\oa_db\oa_back</url>
+		<user>sa</user>
+		<password>sa</password>
+		<driver>org.h2.Driver</driver>
+	</datasource>
+	<datasource name="admin">
+		<url>jdbc:h2:tcp://webserver:9394/D:\oa_db\admin</url>
+		<user>sa</user>
+		<password>sa</password>
+		<driver>org.h2.Driver</driver>
+	</datasource>
+</db>

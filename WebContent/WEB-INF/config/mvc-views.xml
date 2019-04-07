@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mvcList>
+	<mvcView url="index.mvc" handler="com.tntxia.oa.admin.action.mvc.IndexAction">
+		<title>OA管理</title>
+		<isWholePage>true</isWholePage>
+		<charset>UTF-8</charset>
+		<stylesheets>
+			<stylesheet>/static/lib/bootstrap/css/bootstrap.css</stylesheet>
+			<stylesheet>/static/lib/bootstrap-plus/css/bootstrap.nav.css</stylesheet>
+			<stylesheet>css/tntxiaui/style.css</stylesheet>
+			<stylesheet>css/style.css</stylesheet>
+			<stylesheet>/static/lib/ztree/css/zTreeStyle/zTreeStyle.css</stylesheet>
+			<stylesheet>css/tntxiaui/style.css</stylesheet>
+			<stylesheet>/static/lib/easy-tree/css/easy-tree.css</stylesheet>
+		</stylesheets>
+		<scripts>
+			<script>/static/lib/jquery/jquery.js</script>
+			<script>/static/lib/ztree/js/jquery.ztree.all.js</script>
+			<script>/static/lib/jquery/jquery.form.js</script>
+			<script>js/jxiaui/select.js</script>
+			<script>js/jxiaui/form.js</script>
+			<script>js/jxiaui/getParamMap.js</script>
+			<script>/static/lib/vue/vue.js</script>
+			<script>lib/vue-manager.js</script>
+			<script>/static/lib/easy-tree/js/easy-ztree.js</script>
+			<script>/static/lib/jxiaui/js/http.js</script>
+			<script>/static/lib/jxiaui/js/datepick.js</script>
+			<script>/static/lib/jxiaui/js/jxiaui.js</script>
+			<script>/static/lib/bootstrap/js/bootstrap.js</script>
+			<script>/static/lib/bootstrap-plus/js/bootstrap-utils.js</script>
+			<script>/static/lib/bootstrap-plus/js/bootstrap.grid.js</script>
+			<script>/static/lib/webuploader/webuploader.js</script>
+			<script>js/ckeditor.js</script>
+			<script>js/menu.js</script>
+			<script>js/bundle.js</script>
+			<script>/static/lib/module_route/module_route.js</script>
+			<script>modules/department.module.js</script>
+			<script>modules/position.module.js</script>
+			<script>modules/config.module.js</script>
+			<script>modules/stamp.module.js</script>
+			<script>modules/logo.module.js</script>
+			<script>modules/banner.module.js</script>
+			<script>modules/contact_template.module.js</script>
+			<script>modules/currency.module.js</script>
+			<script>modules/user.module.js</script>
+		</scripts>
+		<templates>
+			<template>index.ftl</template>
+		</templates>
+	</mvcView>
+
+	<mvcView url="login.mvc">
+		<title>用户登录</title>
+		<isWholePage>true</isWholePage>
+		<stylesheets>
+			<stylesheet>lib/bootstrap/css/bootstrap.css</stylesheet>
+			<stylesheet>css/login.css</stylesheet>
+		</stylesheets>
+		<scripts>
+			<script>/static/lib/jquery/jquery.js</script>
+			<script>js/jquery.blockUI.js</script>
+			<script>/static/lib/vue/vue.js</script>
+			<script>lib/bootstrap/js/bootstrap.js</script>
+			<script>js/login.js</script>
+		</scripts>
+		<templates>
+			<template>login.ftl</template>
+		</templates>
+	</mvcView>
+
+	<mvcView url="choose.mvc">
+		<title>选择项目</title>
+		<isWholePage>true</isWholePage>
+		<stylesheets>
+			<stylesheet>lib/bootstrap/css/bootstrap.css</stylesheet>
+			<stylesheet>css/login.css</stylesheet>
+		</stylesheets>
+		<scripts>
+			<script>js/jquery.js</script>
+			<script>js/jquery.blockUI.js</script>
+			<script>/static/lib/vue/vue.js</script>
+			<script>lib/bootstrap/js/bootstrap.js</script>
+			<script>js/choose.js</script>
+		</scripts>
+		<templates>
+			<template>choose.ftl</template>
+		</templates>
+	</mvcView>
+	
+	<mvcView url="market/index.mvc" handler="com.tntxia.oa.market.action.mvc.MarketIndexAction">
+		<title>市场营销</title>
+		<isWholePage>true</isWholePage>
+		<charset>UTF-8</charset>
+		<stylesheets>
+			<stylesheet>css/top.css</stylesheet>
+			<stylesheet>css/font-awesome/style.css</stylesheet>
+			<stylesheet>libs/bootstrap/css/bootstrap.css</stylesheet>
+			<stylesheet>css/cwface.css</stylesheet>
+			<stylesheet>css/tntxiaui/style.css</stylesheet>
+			<stylesheet>css/style.css</stylesheet>
+		</stylesheets>
+		<scripts>
+			<script>/static/lib/jquery/jquery.js</script>
+			<script>js/lib/vue.js</script>
+			<script>js/top.js</script>
+			<script>/static/lib/jxiaui/js/jxiaui.js</script>
+			<script>/static/lib/bootstrap/js/bootstrap.js</script>
+			<script>/static/lib/bootstrap-plus/js/bootstrap-utils.js</script>
+			<script>/static/lib/bootstrap-plus/js/bootstrap.grid.js</script>
+			<script>/static/lib/module_route/module_route.js</script>
+			<script>js/sale/index.js</script>
+		</scripts>
+		<templates>
+			<template>common/oa_common_header_utf8.ftl</template>
+			<template>common/oa_common_leftbar.ftl</template>
+			<template>common/common_container.ftl</template>
+		</templates>
+		<initParams>
+			<leftbar>sale</leftbar>
+		</initParams>
+	</mvcView>
+
+
+</mvcList>
