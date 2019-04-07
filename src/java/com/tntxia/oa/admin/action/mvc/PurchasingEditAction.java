@@ -8,9 +8,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.tntxia.httptrans.HttpTransfer;
 import com.tntxia.oa.admin.PurchasingStatus;
 
-import com.tntxia.web.httptrans.HttpTransfer;
 import com.tntxia.web.mvc.MVCAction;
 
 public class PurchasingEditAction extends MVCAction {

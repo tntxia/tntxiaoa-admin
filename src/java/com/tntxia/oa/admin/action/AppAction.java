@@ -1,14 +1,17 @@
 package com.tntxia.oa.admin.action;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tntxia.dbmanager.DBManager;
+import com.tntxia.httptrans.HttpTransfer;
 import com.tntxia.web.mvc.BaseAction;
-import com.tntxia.web.mvc.PageBean;
+import com.tntxia.web.mvc.WebRuntime;
 
 public class AppAction extends BaseAction{
 	
@@ -51,27 +54,31 @@ public class AppAction extends BaseAction{
 		return this.success();
 	}
 	
-	private int getCount() throws Exception{
-		String sql = "select count(*) from tntxiaoa_app";
-		return dbManager.getCount(sql);
-	}
-	
 	@SuppressWarnings("rawtypes")
-	public Map<String,Object> list(HttpServletRequest request,
-			HttpServletResponse response) throws Exception{
-		PageBean pageBean = this.getPageBean(request);
-		String sql = "select top "+pageBean.getTop()+" * from tntxiaoa_app";
-		List list = dbManager.queryForList(sql, true);
-		int count = this.getCount();
-		return this.getPagingResult(list, pageBean, count);
+	public Map<String,Object> list(WebRuntime runtime) throws Exception{
+		
+		ResourceBundle rb = ResourceBundle.getBundle("oa_admin");
+		HttpTransfer transfer = new HttpTransfer();
+		transfer.setHost(rb.getString("oa_center_server"));
+		transfer.setPort(rb.getString("oa_center_port"));
+		transfer.setContextPath(rb.getString("oa_center_url"));
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("page", runtime.getParam("page"));
+		Map res = transfer.getMap("app!list", param);
+		return res;
 	}
 	
 	@SuppressWarnings("rawtypes")
 	public List listAll(HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
-		PageBean pageBean = this.getPageBean(request);
-		String sql = "select top "+pageBean.getTop()+" * from tntxiaoa_app";
-		return dbManager.queryForList(sql, true);
+		ResourceBundle rb = ResourceBundle.getBundle("oa_admin");
+		HttpTransfer transfer = new HttpTransfer();
+		transfer.setHost(rb.getString("oa_center_server"));
+		transfer.setPort(rb.getString("oa_center_port"));
+		transfer.setContextPath(rb.getString("oa_center_url"));
+		
+		List list = transfer.getList("app!listAll", null);
+		return list;
 		
 	}
 	

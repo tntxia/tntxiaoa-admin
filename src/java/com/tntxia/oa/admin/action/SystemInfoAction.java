@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.tntxia.dbmanager.DBManager;
 import com.tntxia.web.mvc.BaseAction;
-import com.tntxia.web.mvc.view.FTLView;
 
 public class SystemInfoAction  extends BaseAction{
 	
 	private DBManager dbManager = getDBManager("oa");
 	
-	public FTLView view(HttpServletRequest request,
+	public Map<String,Object> view(HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
 		
 		String sql =  "select * from system_info";
 		Map<String,Object> systemInfo = dbManager.queryForMap(sql, true);
-		FTLView view = new FTLView("system.ftl",systemInfo);
-		return view;
+		return systemInfo;
 		
 	}
 	

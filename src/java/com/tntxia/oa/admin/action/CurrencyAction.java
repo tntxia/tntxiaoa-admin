@@ -1,8 +1,6 @@
 package com.tntxia.oa.admin.action;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.tntxia.dbmanager.DBManager;
 import com.tntxia.web.mvc.BaseAction;
+import com.tntxia.web.mvc.WebRuntime;
 
 /**
  * 
@@ -54,34 +53,26 @@ public class CurrencyAction extends BaseAction{
 		return res;
 	}
 	
+	public Map<String,Object> add(WebRuntime runtime) throws Exception{
+		
+		String name = runtime.getParam("name");
+		String code = runtime.getParam("code");
+		String rate = runtime.getParam("rate");
+		String iconClass = runtime.getParam("iconClass");
+		String sql = "insert into currency(name,code,rate,icon_class) values(?,?,?,?)";
+		dbManager.update(sql, new Object[]{name,code,rate,iconClass});
+		return this.success();
+		
+	}
+	
 	public Map<String, Object> list(HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
 		
 		String sql = "select * from currency where 1=1";
 		
-		String dict_type = request.getParameter("dict_type");
-		String dict_key = request.getParameter("dict_key");
-		String dict_value = request.getParameter("dict_value");
-		
-		List<Object> params = new ArrayList<Object>();
-		
-		if(StringUtils.isNotEmpty(dict_type)){
-			sql += " and dict_type like '%"+dict_type+"%' ";
-		}
-		
-		if(StringUtils.isNotEmpty(dict_key)){
-			sql += " and dict_key = ? ";
-			params.add(dict_key);
-		}
-		
-		if(StringUtils.isNotEmpty(dict_value)){
-			sql += " and dict_value = ? ";
-			params.add(dict_value);
-		}
-		
 		
 		Map<String, Object> res = new HashMap<String, Object>();
-		res.put("rows", dbManager.queryForList(sql,params, true));
+		res.put("rows", dbManager.queryForList(sql,new Object[]{}, true));
 		
 		return res;
 		

@@ -8,6 +8,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
  * @author tntxia
  * @date 2015-2-24
  */
+@WebFilter("/*")
 public class SessionFilter implements Filter {
 
 	@Override
@@ -31,7 +33,7 @@ public class SessionFilter implements Filter {
 
 		// 不过滤的uri
 		String[] notFilter = new String[] { "login.do", "login.ftl","login.mvc",".css",
-				".js", ".gif", ".png", ".htm", ".asp", ".jpg","" };
+				".js", ".gif", ".png", ".htm", ".asp", ".jpg",".map" };
 
 		HttpServletRequest req = (HttpServletRequest) request;
 
@@ -47,10 +49,11 @@ public class SessionFilter implements Filter {
 				break;
 			}
 		}
+		
 		if (doFilter) {
-
+			
 			HttpSession session = req.getSession();
-
+			
 			// 执行过滤
 			// 从session中获取登录者实体
 			String username = (String) session.getAttribute("username");
@@ -60,18 +63,6 @@ public class SessionFilter implements Filter {
 						response);
 				return;
 			}
-
-			// 从session中获取正在管理的应用
-			String app = (String) session.getAttribute("app");
-			if(!url.endsWith("appManage.mvc") && !url.endsWith("app.do")){
-				if (null == app) {
-					String choosePath = "/choose.mvc";
-					request.getRequestDispatcher(choosePath).forward(request,
-							response);
-					return;
-				}
-			}
-			
 
 			// 如果session中存在登录者和应用，则继续
 			filterChain.doFilter(request, response);

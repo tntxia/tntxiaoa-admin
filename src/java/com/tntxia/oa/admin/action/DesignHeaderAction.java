@@ -1,14 +1,12 @@
 package com.tntxia.oa.admin.action;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,107 +17,30 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
 
-import com.tntxia.dbmanager.DBManager;
+import com.tntxia.httptrans.HttpTransfer;
+import com.tntxia.oa.admin.service.ConfigService;
 import com.tntxia.web.mvc.BaseAction;
+import com.tntxia.web.mvc.WebRuntime;
+import com.tntxia.web.util.Dom4jUtil;
 
 public class DesignHeaderAction extends BaseAction {
-
-	private DBManager dbManager = this.getDBManager("admin");
-
-	private String getUplaodPath(String app, String appPath, String newFileName,
-			HttpServletRequest request) {
-		
-		String uploadDirPath = this.getAppRealPath(app, request)
-				+ "\\"+appPath;
-		File uploadDir = new File(uploadDirPath);
-		uploadDir.mkdirs();
-		String res = uploadDirPath + "\\" + newFileName;
-		return res;
-	}
-
-	/**
-	 * 
-	 * @param fileName
-	 * @param filePath
-	 * @throws Exception 
-	 */
-	private void saveToDB(String app, String appPath,
-			String realPath,String width,String height) throws Exception {
-		String sql = "insert into tntxiaoa_design_header(app_path,real_path,app,width,height,create_time) values(?,?,?,?,?,?)";
-		dbManager.update(sql, new Object[] { appPath,realPath,app,width,height,
-				new Date(System.currentTimeMillis()) });
-	}
-
-	private String getParameter(List<FileItem> list, String key)
-			throws UnsupportedEncodingException {
-
-		for (FileItem item : list) {
-			// 如果fileitem中封装的是普通输入项的数据
-			if (item.isFormField()) {
-				String name = item.getFieldName();
-				if (key.equals(name)) {
-					return item.getString("UTF-8");
-				}
-			}
-		}
-		return null;
-	}
 	
-	private void makeConfigFile(String app,String headerImagePath,String width,String height
-			,HttpServletRequest request){
-		
-		String appPath = this.getAppRealPath(app, request);
-		
-		//2.第二种 创建文档及设置根元素节点的方式  
-        Element root = DocumentHelper.createElement("header");
-        Document document = DocumentHelper.createDocument(root);
-          
-        //给根节点添加孩子节点 
-        Element element1 = root.addElement("img");  
-        element1.setText(headerImagePath);
-          
-        Element element2 = root.addElement("width");  
-        element2.setText(width);
-        
-        Element element3 = root.addElement("height");  
-        element3.setText(height);
-        
-        String designConfigDir = appPath+"\\WEB-INF\\config\\design";
-        new File(designConfigDir).mkdirs();
-          
-        //把生成的xml文档存放在硬盘上  true代表是否换行  
-        OutputFormat format = new OutputFormat("    ",true);  
-        format.setEncoding("UTF-8");//设置编码格式  
-        XMLWriter xmlWriter = null;
-		try {
-			xmlWriter = new XMLWriter(new FileOutputStream(designConfigDir+"\\header.xml"),format);
-			xmlWriter.write(document);  
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally{
-			if(xmlWriter!=null)
-				try {
-					xmlWriter.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		}
-      
-	}
+	private ConfigService service = new ConfigService();
 	
-	private String getAppRealPath(String app,HttpServletRequest request){
-		File currPath = new File(request.getServletContext().getRealPath("/"));
-		String parentPath = currPath.getParent();
-		return parentPath+"\\"+app;
+	private Map<String,Object> updateOACenter(String appId,String logoFile) throws Exception{
+		
+		ResourceBundle rb = ResourceBundle.getBundle("oa_admin");
+		HttpTransfer transfer = new HttpTransfer();
+		transfer.setHost(rb.getString("oa_center_server"));
+		transfer.setPort(rb.getString("oa_center_port"));
+		transfer.setContextPath(rb.getString("oa_center_url"));
+		
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("appId", appId);
+		param.put("logoFile", logoFile);
+		return transfer.getMap("design!setLogo", param);
+        
 	}
 
 	/**
@@ -148,9 +69,7 @@ public class DesignHeaderAction extends BaseAction {
 		}
 
 		List<FileItem> list = upload.parseRequest(request);
-		String appPath = getParameter(list, "appPath");
-		String width = getParameter(list, "width");
-		String height = getParameter(list, "height");
+		
 		String app = (String) request.getSession().getAttribute("app");
 		String fileName = null;
 		FileItem itemUpload = null;
@@ -177,8 +96,10 @@ public class DesignHeaderAction extends BaseAction {
 		
 		String ext = FilenameUtils.getExtension(fileName);
 		String newFileName = UUID.randomUUID().toString().replaceAll("-", "")+"."+ext;
-
-		String uploadPath = this.getUplaodPath(app, appPath,newFileName, request);
+		
+		String uploadDir = ResourceBundle.getBundle("oa_admin").getString("upload_path");
+		
+		String uploadPath = uploadDir+ File.separator + newFileName;;
 
 		// 创建一个文件输出流
 		FileOutputStream out = new FileOutputStream(uploadPath);
@@ -199,14 +120,42 @@ public class DesignHeaderAction extends BaseAction {
 		out.close();
 		// 删除处理文件上传时生成的临时文件
 		itemUpload.delete();
-
-		// 保存到admin数据库中
-		this.saveToDB(app, appPath,uploadPath,width,height);
 		
 		// 生成配置文件
-		this.makeConfigFile(app, appPath+"/"+newFileName, width, height, request);
+		this.updateOACenter(app,newFileName);
 
 		return this.success();
+	}
+	
+	private String getConfigFilePath(String appId) throws Exception{
+		
+		Map<String,Object> config = service.getConfig(appId);
+		String path = (String) config.get("path");
+		String configFilePath = path+File.separator+"WEB-INF"
+		+File.separator+"config"+File.separator+"design"+File.separator
+		+"header.xml";
+		return configFilePath;
+		
+	}
+	
+	public Map<String,Object> getHeader(WebRuntime runtime) throws Exception{
+		
+		String appId = runtime.getSessionStr("app");
+		String configFilePath = getConfigFilePath(appId);
+		
+		Document doc = Dom4jUtil.getDoc(configFilePath);
+		
+		String img = doc.getRootElement().selectSingleNode("img").getText();
+		String width = doc.getRootElement().selectSingleNode("width").getText();
+		String height = doc.getRootElement().selectSingleNode("width").getText();
+		
+		Map<String,Object> res = new HashMap<String,Object>();
+		res.put("img", img);
+		res.put("width", width);
+		res.put("height", height);
+		return res;
+		
+		
 	}
 
 }

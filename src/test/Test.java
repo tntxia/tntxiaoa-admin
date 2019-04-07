@@ -15,12 +15,7 @@ public class Test {
 	 */
 	public static void main(String[] args) throws Exception {
 		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("success", true);
-		System.out.println(JSON.toJSONString(map));
-		
-		String ext = FilenameUtils.getExtension("1.txt");
-		System.out.println(ext);
+		System.out.println("test.css".endsWith(".css"));
 		
 	}
 

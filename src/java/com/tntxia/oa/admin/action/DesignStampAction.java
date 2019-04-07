@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -26,19 +27,18 @@ import org.dom4j.io.XMLWriter;
 
 import com.tntxia.dbmanager.DBManager;
 import com.tntxia.web.mvc.BaseAction;
+import com.tntxia.web.mvc.WebRuntime;
+import com.tntxia.web.mvc.view.FileView;
+import com.tntxia.web.util.Dom4jUtil;
 
 public class DesignStampAction extends BaseAction {
 
 	private DBManager dbManager = this.getDBManager("admin");
 
-	private String getUplaodPath(String app, String appPath, String newFileName,
+	private String getUplaodPath(String app, String projectPath, String newFileName,
 			HttpServletRequest request) {
 		
-		String uploadDirPath = this.getAppRealPath(app, request)
-				+ "\\"+appPath;
-		File uploadDir = new File(uploadDirPath);
-		uploadDir.mkdirs();
-		String res = uploadDirPath + "\\" + newFileName;
+		String res = projectPath + "\\images\\" + newFileName;
 		return res;
 	}
 
@@ -70,10 +70,8 @@ public class DesignStampAction extends BaseAction {
 		return null;
 	}
 	
-	private void makeConfigFile(String app,String headerImagePath,String width,String height
-			,HttpServletRequest request){
-		
-		String appPath = this.getAppRealPath(app, request);
+	private void makeConfigFile(String app,String projectPath,String fileName,String width,String height
+		){
 		
 		//2.第二种 创建文档及设置根元素节点的方式  
         Element root = DocumentHelper.createElement("header");
@@ -81,7 +79,7 @@ public class DesignStampAction extends BaseAction {
           
         //给根节点添加孩子节点 
         Element element1 = root.addElement("img");  
-        element1.setText(headerImagePath);
+        element1.setText("images/"+fileName);
           
         Element element2 = root.addElement("width");  
         element2.setText(width);
@@ -89,7 +87,7 @@ public class DesignStampAction extends BaseAction {
         Element element3 = root.addElement("height");  
         element3.setText(height);
         
-        String designConfigDir = appPath+"\\WEB-INF\\config\\design";
+        String designConfigDir = projectPath+"\\WEB-INF\\config\\design";
         new File(designConfigDir).mkdirs();
           
         //把生成的xml文档存放在硬盘上  true代表是否换行  
@@ -114,12 +112,6 @@ public class DesignStampAction extends BaseAction {
 				}
 		}
       
-	}
-	
-	private String getAppRealPath(String app,HttpServletRequest request){
-		File currPath = new File(request.getServletContext().getRealPath("/"));
-		String parentPath = currPath.getParent();
-		return parentPath+"\\"+app;
 	}
 
 	/**
@@ -148,7 +140,7 @@ public class DesignStampAction extends BaseAction {
 		}
 
 		List<FileItem> list = upload.parseRequest(request);
-		String appPath = getParameter(list, "appPath");
+		String projectPath = getProjectPath();
 		String width = getParameter(list, "width");
 		String height = getParameter(list, "height");
 		String app = (String) request.getSession().getAttribute("app");
@@ -178,7 +170,7 @@ public class DesignStampAction extends BaseAction {
 		String ext = FilenameUtils.getExtension(fileName);
 		String newFileName = UUID.randomUUID().toString().replaceAll("-", "")+"."+ext;
 
-		String uploadPath = this.getUplaodPath(app, appPath,newFileName, request);
+		String uploadPath = this.getUplaodPath(app, projectPath,newFileName, request);
 
 		// 创建一个文件输出流
 		FileOutputStream out = new FileOutputStream(uploadPath);
@@ -201,12 +193,56 @@ public class DesignStampAction extends BaseAction {
 		itemUpload.delete();
 
 		// 保存到admin数据库中
-		this.saveToDB(app, appPath,uploadPath,width,height);
+		this.saveToDB(app, projectPath,uploadPath,width,height);
 		
 		// 生成配置文件
-		this.makeConfigFile(app, appPath+"/"+newFileName, width, height, request);
+		this.makeConfigFile(app, projectPath,newFileName, width, height);
 
 		return this.success();
+	}
+	
+	private String getProjectPath() throws Exception{
+		String sql = "select * from config";
+		Map<String,Object> map = dbManager.queryForMap(sql, true);
+		return (String)map.get("path");
+	}
+	
+	public FileView getImg(WebRuntime runtime) throws Exception{
+		
+		FileView view = new FileView();
+		String projectPath = this.getProjectPath();
+		
+		Document doc = Dom4jUtil.getDoc(projectPath+"\\WEB-INF\\config\\design\\stamp.xml");
+		
+		String img = Dom4jUtil.getProp(doc.getRootElement(), "img");
+		
+		String[] arr = img.split("/");
+		
+		String stampPath = projectPath;
+		
+		for(String s : arr){
+			stampPath+= File.separator+s;
+		}
+		
+		view.setFilePath(stampPath);
+		return view;
+	}
+	
+	public Map<String,Object> detail(WebRuntime runtime) throws Exception{
+		
+		String projectPath = this.getProjectPath();
+		
+		Document doc = Dom4jUtil.getDoc(projectPath+"\\WEB-INF\\config\\design\\stamp.xml");
+		
+		String width = Dom4jUtil.getProp(doc.getRootElement(), "width");
+		
+		String height = Dom4jUtil.getProp(doc.getRootElement(), "height");
+		
+		Map<String,Object> res = new HashMap<String,Object>();
+		res.put("width", width);
+		res.put("height", height);
+		return res;
+		
 	}
 
 }

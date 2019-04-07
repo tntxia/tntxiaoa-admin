@@ -9,14 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tntxia.dbmanager.DBManager;
-
+import com.tntxia.oa.admin.entity.ZTreeNode;
+import com.tntxia.oa.admin.service.MenuService;
 import com.tntxia.web.mvc.BaseAction;
+import com.tntxia.web.mvc.WebRuntime;
 
 public class RestrainMenuAction extends BaseAction{
 	
 	private DBManager oaDBManager = this.getDBManager("oa");
 	
-	private DBManager dbManager = this.getDBManager();
+	private DBManager dbManager = this.getDBManager("oa_back");
+	
+	private MenuService menuService = new MenuService();
 	
 	public Map<String,Object> list(HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
@@ -32,11 +36,10 @@ public class RestrainMenuAction extends BaseAction{
 		
 	}
 	
-	public Map<String,Object> setMenu(HttpServletRequest request,
-			HttpServletResponse response) throws Exception{
+	public Map<String,Object> setMenu(WebRuntime runtime) throws Exception{
 		
-		String id = request.getParameter("id");
-		String[] menus = request.getParameter("menus").split(",");
+		String id = runtime.getParam("id");
+		String[] menus = runtime.getParam("menus").split(",");
 		clearMenu(id);
 		
 		String sql = "insert into restrain_menu(restrain_id,menu_id) values(?,?)";
@@ -51,10 +54,21 @@ public class RestrainMenuAction extends BaseAction{
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public Map<String,Object> getMenus(HttpServletRequest request,
-			HttpServletResponse response) throws Exception{
+	public List<ZTreeNode> getMenuZTreeNode(WebRuntime runtime) throws Exception{
 		
-		String id = request.getParameter("id");
+		String id = runtime.getParam("id");
+		
+		List<ZTreeNode> res = new ArrayList<ZTreeNode>();
+		
+		List menus = menuService.list();
+		
+		for(int i=0;i<menus.size();i++) {
+			Map map = (Map) menus.get(i);
+			ZTreeNode treeNode = new ZTreeNode();
+			treeNode.setId(String.valueOf((Integer)map.get("id")));
+			treeNode.setName((String) map.get("name"));
+			res.add(treeNode);
+		}
 		
 		String sql = "select * from restrain_menu where restrain_id = ?";
 		
@@ -66,8 +80,16 @@ public class RestrainMenuAction extends BaseAction{
 			ids.add((Integer) item.get("menu_id"));
 		}
 		
-		Map<String, Object> res = new HashMap<String, Object>();
-		res.put("ids", ids);
+		for(ZTreeNode node : res) {
+			String nodeId = node.getId();
+			for(Integer menuId : ids) {
+				if(String.valueOf(menuId).equals(nodeId)) {
+					node.setChecked(true);
+					break;
+				}
+			}
+		}
+		
 		return res;
 	}
 

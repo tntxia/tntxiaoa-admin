@@ -8,14 +8,14 @@ import com.tntxia.dbmanager.DBManager;
 import com.tntxia.web.mvc.BaseAction;
 import com.tntxia.web.mvc.WebRuntime;
 
-public class ProccessExpenseAction extends BaseAction {
+public class ProccessPaymentAction extends BaseAction {
 	
 	private DBManager dbManager = this.getDBManager("oa_back");
 	
 	@SuppressWarnings("rawtypes")
 	public Map<String,Object> list(WebRuntime runtime ) throws Exception{
 		
-		String sqlWhere = " where flow_type='expense'";
+		String sqlWhere = " where flow_type='payment'";
 		
 		String sql = "select * from work_flow";
 		List list = dbManager.queryForList(sql+sqlWhere, true);
@@ -30,7 +30,7 @@ public class ProccessExpenseAction extends BaseAction {
 		
 		String dept = runtime.getParam("dept");
 		String man = runtime.getParam("man");
-		String sql = "insert into work_flow(flow_type,dept,audit_man,create_time) values('expense',?,?,?)";
+		String sql = "insert into work_flow(flow_type,dept,audit_man,create_time) values('payment',?,?,?)";
 		dbManager.update(sql, new Object[] {dept,man,new Date(System.currentTimeMillis())});
 		return this.success();
 		

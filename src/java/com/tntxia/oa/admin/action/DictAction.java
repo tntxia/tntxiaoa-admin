@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.tntxia.dbmanager.DBManager;
 import com.tntxia.web.mvc.BaseAction;
+import com.tntxia.web.mvc.WebRuntime;
 
 /**
  * 
@@ -54,14 +55,13 @@ public class DictAction extends BaseAction{
 		return res;
 	}
 	
-	public Map<String, Object> list(HttpServletRequest request,
-			HttpServletResponse response) throws Exception{
+	public Map<String, Object> list(WebRuntime runtime) throws Exception{
 		
 		String sql = "select * from dict where 1=1";
 		
-		String dict_type = request.getParameter("dict_type");
-		String dict_key = request.getParameter("dict_key");
-		String dict_value = request.getParameter("dict_value");
+		String dict_type = runtime.getParam("dict_type");
+		String dict_key = runtime.getParam("dict_key");
+		String dict_value = runtime.getParam("dict_value");
 		
 		List<Object> params = new ArrayList<Object>();
 		

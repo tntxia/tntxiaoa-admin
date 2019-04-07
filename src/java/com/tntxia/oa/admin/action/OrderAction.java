@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.tntxia.web.httptrans.HttpTransfer;
+import com.tntxia.httptrans.HttpTransfer;
 import com.tntxia.web.mvc.BaseAction;
 import com.tntxia.web.mvc.PageBean;
 
