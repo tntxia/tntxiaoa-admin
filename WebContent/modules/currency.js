@@ -1,0 +1,44 @@
+
+exports.init = function(){
+	$("#crud").crud({
+		title:"货币类型管理",
+		idField:"id",
+		cols:[{
+			label:'ID',
+			field:'id'
+		},{
+			label:'名称',
+			field:'name'
+		},{
+			label:'编码',
+			field:'code'
+		},{
+			label:'汇率',
+			field:'rate'
+		}],
+		list:{
+			url:'../currency.do',
+			data:{
+				method:'list'
+			}
+		},
+		create:{
+			url:'../currency.do',
+			data:{
+				method:'update'
+			}
+		},
+		update:{
+			url:'../currency.do',
+			data:{
+				method:'update'
+			}
+		},
+		del:{
+			url:'../currency.do',
+			data:{
+				method:'delete'
+			}
+		}
+	});
+};

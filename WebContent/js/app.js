@@ -1,0 +1,37 @@
+$(function(){
+	$("#crud").crud({
+		title:"应用管理",
+		idField:"id",
+		cols:[{
+			label:'ID',
+			field:'id'
+		},{
+			label:'名称',
+			field:'name'
+		}],
+		list:{
+			url:'app.do',
+			data:{
+				method:'list'
+			}
+		},
+		create:{
+			url:'app.do',
+			data:{
+				method:'add'
+			}
+		},
+		update:{
+			url:'app.do',
+			data:{
+				method:'update'
+			}
+		},
+		del:{
+			url:'app.do',
+			data:{
+				method:'delete'
+			}
+		}
+	});
+});

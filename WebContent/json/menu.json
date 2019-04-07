@@ -1,0 +1,124 @@
+{
+	"menus":[{
+		"title":"基础信息管理",
+		"children":[{
+			"title":"公司管理",
+			"url":"#company"
+		},{
+			"title":"菜单管理",
+			"url":"#menu"
+		},{
+			"title":"权限组菜单管理",
+			"url":"restrain_menu.html"
+		},{
+			"title":"组织架构管理",
+			"url":"#organization"
+		},{
+			"title":"用户管理",
+			"url":"#user"
+		},{
+			"title":"汇率管理",
+			"url":"#currency"
+		},{
+			"title":"品牌管理",
+			"url":"base/trademark.ftl"
+		},{
+			"title":"付款方式管理",
+			"url":"#payway"
+		}]
+	},{
+		"title":"权限管理",
+		"children":[{
+			"title":"权限管理",
+			"url":"#right"
+		},{
+			"title":"权限组管理",
+			"url":"#right_group"
+		},{
+			"title":"角色管理",
+			"url":"#restrain"
+		}]
+	},{
+		"title":"合同模板管理",
+		"children":[{
+			"title":"合同模板管理",
+			"url":"#contact_template"
+		}]
+	},{
+		"title": "采购管理",
+		"children": [{
+			"title": "订单管理",
+			"url": "#purchasing_order"
+		},{
+			"title": "退货订单管理",
+			"url": "#purchasing_refund_order"
+		}]
+	},{
+		"title": "销售管理",
+		"children": [{
+			"title": "订单管理",
+			"url": "#sale_order"
+		},{
+			"title": "退货订单管理",
+			"url": "#sale_order_refund"
+		}]
+	},{
+		"title":"仓库管理",
+		"children":[{
+			"title":"出入库记录管理",
+			"url":"#warehouse_in_out_record"
+		},{
+			"title":"仓库库存管理",
+			"url":"#warehouse"
+		}]
+	},{
+		"title":"外观设计",
+		"children":[{
+			"title":"Logo设计",
+			"url":"#logo"
+		},{
+			"title":"Banner设计",
+			"url":"#banner"
+		},{
+			"title":"印章管理",
+			"url":"#stamp"
+		}]
+	},{
+			
+		"title":"流程审批",
+		"children":[{
+			"title":"费用审批流程",
+			"url":"#process_expense"
+		},{
+			"title":"借款审批流程",
+			"url":"#process_prepaid"
+		},{
+			"title":"付款审批流程",
+			"url":"#process_payment"
+		},{
+			"title":"采购审批流程",
+			"url":"#flow_purchasing"
+		}]
+	},{
+		"title":"财务信息",
+		"children":[{
+			"title":"往来账目管理",
+			"url":"#finance_exchange"
+		},{
+			"title":"费用科目",
+			"url":"finance/expense_account.ftl"
+		},{
+			"title":"付款信息管理",
+			"url":"#finance_payment"
+		},{
+			"title":"欠款信息管理",
+			"url":"#finance_gathering"
+		}]
+	},{
+		"title":"公告管理",
+		"children":[{
+			"title":"公告管理",
+			"url":"#notice"
+		}]
+	}]
+}

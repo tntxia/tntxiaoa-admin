@@ -1,0 +1,14 @@
+<div id="app">
+<table>
+<tr><td>OA的路径：</td>
+<td>
+	<input v-model="path">
+	<span @click="chooseDir" class="glyphicon glyphicon-folder-open dir-choose-button">
+	</span>
+</td></tr>
+<tr><td>公司名称：</td><td><input v-model="company_name"></td></tr>
+<tr><td>公司名称（英文）：</td><td><input v-model="company_name_en"></td></tr>
+</table>
+
+<button @click="sub">确定</button>
+</div>

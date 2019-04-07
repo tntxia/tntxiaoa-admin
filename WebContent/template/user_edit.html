@@ -1,0 +1,55 @@
+
+用户编辑
+<div  id="form">
+<input type="hidden" name="nameid">
+<div class="form-horizontal">
+	<div class="form-group">
+				<label class="col-sm-2 control-label">名称</label>
+				<div class="col-sm-4">
+					<input class="form-control" name="name">
+				</div>
+				<label class="col-sm-2 control-label">英文名</label>
+				<div class="col-sm-4">
+					<input class="form-control" name="name_en">
+				</div>
+			</div>
+</div>
+<div class="form-horizontal">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">性别</label>
+		<div class="col-sm-4">
+			<input type="radio" name="sex" value="male"> 男
+			<input type="radio" name="sex" value="female"> 女
+		</div>
+	</div>
+</div>
+<div class="form-horizontal">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">职位</label>
+		<div class="col-sm-4">
+			<select name="workj" ui="select" url="position!listAll.do" value="role_name" label="role_name">
+				
+			</select>
+		</div>
+		<label class="col-sm-2 control-label">所在部门</label>
+		<div class="col-sm-4">
+			<select name="department_id" ui="select" url="dept!listAll.do" value="id" label="departname">
+				
+			</select>
+		</div>
+	</div>
+			
+</div>
+<div class="form-horizontal">
+	<div class="form-group">
+				
+				<label class="col-sm-2 control-label">电话</label>
+				<div class="col-sm-4">
+					<input class="form-control" v-model="currRow.worktel">
+				</div>
+			</div>
+</div>
+
+<button action="sub">提交</button>
+
+</div>

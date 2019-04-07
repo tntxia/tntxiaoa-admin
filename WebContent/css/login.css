@@ -1,0 +1,83 @@
+#main-content {
+	border-width: 1px 1px 2px;
+	border-style: solid;
+	border-color: #C3CFD8;
+	-moz-border-top-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	border-image: none;
+	border-radius: 2px;
+	margin: -28px auto 0px;
+	max-width: 360px;
+	min-height: 300px !important;
+	min-width: 300px;
+	padding: 35px 20px 20px;
+	position: relative;
+	width: 94%;
+	text-align: center;
+}
+
+.logo {
+	background-size: auto 55px;
+	height: 55px;
+	margin: 10px auto 0px;
+	top: 0px;
+	width: 100%;
+}
+
+header h1 {
+	font-size: 20px;
+	margin: 0px 0px 16px;
+	font-weight: 200;
+}
+
+.input-row {
+	margin-bottom: 12px;
+}
+
+.input-row,.select-row {
+	width: 100%;
+	position: relative;
+}
+
+.username {
+	border-radius: 2px;
+	font-size: 16px;
+	height: 40px;
+}
+
+.password {
+	border-radius: 2px;
+	font-size: 16px;
+	height: 40px;
+}
+
+.input-row input {
+	padding: 0px 0px 0px 20px;
+	background-color: #FFF;
+	border: 1px solid #8A9BA8;
+	box-shadow: 0px 1px 1px #F2F2F2 inset;
+	color: #424F59;
+	outline: 0px none;
+	position: relative;
+	transition-duration: 150ms;
+	transition-property: border-color;
+	width: 100%;
+	z-index: 2;
+}
+
+.button-row .button,.button-row button {
+	border-radius: 2px;
+	font-size: 20px;
+	height: 44px;
+	padding: 8px 0px;
+	font-size:20px;
+	background: #0095DD none repeat scroll 0% 0%;
+	border: 0px none;
+	color: #FFF;
+	cursor: pointer;
+	transition-duration: 150ms;
+	transition-property: background-color;
+	width: 100%;
+}

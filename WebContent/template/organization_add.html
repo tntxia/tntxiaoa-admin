@@ -1,0 +1,21 @@
+<div id="form">
+	<input name="parentId" type="hidden">
+	<div>
+		上级部门：<label name="parent"></label>
+	</div>
+	<div>
+		部门名称：<input name="name">
+	</div>
+	<div>
+		部门编码：<input name="code">
+	</div>
+	<div>
+		部门领导：<select ui="select" url="user!listAll.do" value="name" label="name" name="leader"></select>
+	</div>
+	<div>
+		备注：<textarea name="remark"></textarea>
+	</div>
+	<div>
+		<button action="add">增加</button>
+	</div>
+</div>

@@ -1,0 +1,37 @@
+$(function(){
+	
+	$("#crud").crud({
+		title:'费用流程审批',
+		cols:[{
+			label:'费用申请部门',
+			field:'dept'
+		},{
+			label:'职位',
+			field:'role'
+		},{
+			label:'最少金额',
+			field:'price_min'
+		},{
+			label:'最多金额',
+			field:'price_max'
+		},{
+			label:'第一审批人',
+			field:'dd_man'
+		},{
+			label:'是否二审',
+			field:'fif'
+		},{
+			label:'第二审批人',
+			field:'fspman'
+		}],
+		list:{
+			url:'expense.do',
+			data:{
+				method:'list'
+			}
+		},
+		create:{
+			
+		}
+	});
+});
