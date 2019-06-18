@@ -10,13 +10,42 @@ module.exports=exports;
 exports.template = 'template/user.html';
 exports.init = function(){
 	
+	let grid;
+	
+	new Vue({
+		el: "#toolbar",
+		data: {
+			deptId:null,
+			deptList: []
+		},
+		mounted() {
+			let vm = this;
+			$.ajax({
+				url : 'dept!listAll.do',
+				success : function(data) {
+					vm.deptList = data;
+				},
+				error : function() {
+					alert("请求失败");
+				}
+			});
+		},
+		methods: {
+			query() {
+				let me = this;
+				grid.load({
+					deptId: me.deptId
+				})
+			},
+			add() {
+				router.goRoute("user_add");
+			}
+		}
+	})
+	
 	let target = $("#datagrid");
 	
-	$("#addBtn").click(function(){
-		router.goRoute("user_add");
-	});
-	
-	let grid = new BootstrapGrid({
+	grid = new BootstrapGrid({
 		url:'user!list.do',
 		target:target,
 		cols:[{
@@ -113,7 +142,6 @@ new Vue({
 		}
 	},
 	created:function(){
-		this.initData();
 	},
 	methods : {
 		initData:function(){
@@ -132,16 +160,6 @@ new Vue({
 				url : 'restrain!list.do',
 				success : function(data) {
 					vm.restrainList = data.rows;
-				},
-				error : function() {
-					alert("请求失败");
-				}
-			});
-			
-			$.ajax({
-				url : 'dept!list.do',
-				success : function(data) {
-					vm.departmentList = data.rows;
 				},
 				error : function() {
 					alert("请求失败");

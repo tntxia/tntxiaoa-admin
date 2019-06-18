@@ -1,5 +1,13 @@
 
 <div>
-	<button class="btn btn-primary" id="addBtn">增加</button>
+	<div id="toolbar">
+		部门： 
+		<select v-model="deptId">
+			<option v-for="(d,index) in deptList" :value="d.id">{{d.departname}}</option>
+		</select>
+		<button class="btn btn-primary" @click="query">查询</button>
+		<button class="btn btn-primary" @click="add">增加</button>
+	</div>
+	
 	<div id="datagrid"></div>
 </div>
