@@ -44,6 +44,13 @@ public class RestrainAction extends BaseAction {
 	}
 	
 	@SuppressWarnings("rawtypes")
+	public List listAll(WebRuntime runtime) throws Exception{
+		String sql = "select  * from restrain";
+		List list = dbManager.queryForList(sql, true);
+		return list;
+	}
+	
+	@SuppressWarnings("rawtypes")
 	public List<ZTreeNode> getRightZTreeNode(WebRuntime runtime) throws Exception {
 		
 		String id = runtime.getParam("id");

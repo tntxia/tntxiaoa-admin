@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.tntxia.dbmanager.DBManager;
 import com.tntxia.oa.admin.entity.ZTreeNode;
 import com.tntxia.oa.admin.service.DepartmentService;
@@ -39,7 +41,17 @@ public class UserAction extends BaseAction{
 	public Map<String,Object> list(WebRuntime runtime) throws Exception{
 		Map<String, Object> res = new HashMap<String, Object>();
 		
-		List rows = dbManager.queryForList("select * from username", true);
+		String sql = "select * from username where 1=1 ";
+		
+		List<Object> params = new ArrayList<Object>();
+		
+		String deptId = runtime.getParam("deptId");
+		if (StringUtils.isNotEmpty(deptId)) {
+			sql += " and department_id = ?";
+			params.add(deptId);
+		}
+		
+		List rows = dbManager.queryForList(sql, params, true);
 		for(int i=0;i<rows.size();i++) {
 			Map m = (Map) rows.get(i);
 			Integer department_id = (Integer) m.get("department_id") ;
@@ -112,9 +124,11 @@ public class UserAction extends BaseAction{
 		String department_id = runtime.getParam("department_id");
 		String sex = runtime.getParam("sex");
 		String position = runtime.getParam("workj");
-		String sql = "update username set name_en=?,department_id=?,workj=?,sex=? where nameid = ?";
+		String restrain_id = runtime.getParam("restrain_id");
+		
+		String sql = "update username set name_en=?,department_id=?,workj=?,sex=?,restrain_id=? where nameid = ?";
 		String id = runtime.getParam("nameid");
-		dbManager.update(sql, new Object[]{name_en,department_id,position,sex,id});
+		dbManager.update(sql, new Object[]{name_en,department_id,position,sex,restrain_id, id});
 		return success();
 	}
 	
