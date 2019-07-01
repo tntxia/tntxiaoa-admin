@@ -50,6 +50,11 @@ public class UserAction extends BaseAction{
 			sql += " and department_id = ?";
 			params.add(deptId);
 		}
+		String name = runtime.getParam("name");
+		if (StringUtils.isNotEmpty(name)) {
+			sql += " and name like ?";
+			params.add("%" + name + "%");
+		}
 		
 		List rows = dbManager.queryForList(sql, params, true);
 		for(int i=0;i<rows.size();i++) {
