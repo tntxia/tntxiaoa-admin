@@ -15,7 +15,8 @@ exports.init = function(){
 	new Vue({
 		el: "#toolbar",
 		data: {
-			deptId:null,
+			deptId:'',
+			name: null,
 			deptList: []
 		},
 		mounted() {
@@ -34,7 +35,8 @@ exports.init = function(){
 			query() {
 				let me = this;
 				grid.load({
-					deptId: me.deptId
+					deptId: me.deptId,
+					name: me.name
 				})
 			},
 			add() {

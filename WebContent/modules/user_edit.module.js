@@ -10,7 +10,6 @@ module.exports=exports;
 exports.init = function(){
 	
 	let id = router.getParams().id;
-	
 	new Vue({
 		el: '#form',
 		data: {
@@ -70,15 +69,12 @@ exports.init = function(){
 			},
 			sub() {
 				let params = this.form;
-				debugger
 				http.post({
 					url:'user!update.do',
 					data:params
 				}).then(res=>{
-					debugger
-					
 					if(res.success){
-						// router.goRoute("user");
+						router.goRoute("user");
 					}
 				})
 			}
