@@ -10,41 +10,41 @@ module.exports=exports;
 exports.template = 'template/sale_order.html';
 exports.init = function(){
 	
-	let form = $("#form").buildform({
-		actions: {
+	new Vue({
+		el: '#vue',
+		data: {
+			form: {
+				number: null,
+				sdate: null,
+				edate: null
+			},
+			dataset: {
+				url: 'sale!list.do'
+			}
+		},
+		methods: {
+			query() {
+				let datagrid = this.$refs["datagrid"];
+				datagrid.setParams(this.form);
+				datagrid.loadData();
+			},
 			batchDel() {
-				let param = this.getParamMap();
+				let datagrid = this.$refs["datagrid"];
+				let selectedRows = datagrid.getSelectedRows();
+				let ids = selectedRows.map(row=> row.id);
+				console.log(selectedRows);
 				$.ajax({
 					url:'sale!batchDel.do',
-					data: param,
+					data: {
+						ids: ids.join(",")
+					},
 					type: 'post'
 				}).done(res=>{
-					
+					this.query();
 				})
 			}
 		}
 	})
 	
-	let target = $("#datagrid");
-	
-	let grid = new BootstrapGrid({
-		check: true,
-		url:'sale!list.do',
-		target:target,
-		cols:[{
-			label:'单号',
-			field:'number'
-		},{
-			label:'客户名称',
-			field:'coname'
-		},{
-			label:'责任人',
-			field:'man'
-		},{
-			label:'下单时间',
-			field:'datetime'
-		}]
-	});
-	grid.init();
 };
 return module.exports;});
