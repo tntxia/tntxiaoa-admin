@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mvcList>
-	<mvcView url="index.mvc" handler="com.tntxia.oa.admin.action.mvc.IndexAction">
+	<mvcView url="index.mvc">
 		<title>OA管理</title>
 		<isWholePage>true</isWholePage>
 		<charset>UTF-8</charset>
@@ -8,6 +8,9 @@
 			<stylesheet>/static/lib/bootstrap/css/bootstrap.css</stylesheet>
 			<stylesheet>/static/lib/bootstrap-plus/css/bootstrap.nav.css</stylesheet>
 			<stylesheet>css/tntxiaui/style.css</stylesheet>
+			<stylesheet>/static/lib/jxiaui/0.1/css/jxiaui.css</stylesheet>
+			<stylesheet>/static/lib/jxiaui/0.1/css/jxiaui.datepicker.css</stylesheet>
+			<stylesheet>/static/lib/jxiaui/0.1/css/jxiaui.datagrid.css</stylesheet>
 			<stylesheet>css/style.css</stylesheet>
 			<stylesheet>/static/lib/ztree/css/zTreeStyle/zTreeStyle.css</stylesheet>
 			<stylesheet>css/tntxiaui/style.css</stylesheet>
@@ -21,6 +24,7 @@
 			<script>js/jxiaui/form.js</script>
 			<script>js/jxiaui/getParamMap.js</script>
 			<script>/static/lib/vue/vue.js</script>
+			<script>/static/lib/jxiaui/0.1/dist/jxiaui.js</script>
 			<script>lib/vue-manager.js</script>
 			<script>/static/lib/easy-tree/js/easy-ztree.js</script>
 			<script>/static/lib/jxiaui/js/http.js</script>
