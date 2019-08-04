@@ -35,11 +35,12 @@ public class MenuAction extends BaseAction {
 	public Map<String, Object> update(WebRuntime runtime) throws Exception {
 		String id = runtime.getParam("id");
 		String name = runtime.getParam("name");
+		String key_name = runtime.getParam("key_name");
 		String url = runtime.getParam("url");
 		String order_no = runtime.getParam("order_no");
 
-		String sql = "update menu set name = ? , url=?,order_no=? where id=?";
-		dbManager.update(sql, new Object[] { name, url, order_no, id });
+		String sql = "update menu set name = ? , url=?,order_no=?,key_name=? where id=?";
+		dbManager.update(sql, new Object[] { name, url, order_no,key_name, id });
 
 		return this.success();
 
