@@ -72,7 +72,7 @@ public class MenuAction extends BaseAction {
 	@SuppressWarnings("rawtypes")
 	public Map<String, Object> list(WebRuntime runtime) throws Exception {
 
-		String sql = "select * from menu";
+		String sql = "select * from menu order by order_no";
 		List list = dbManager.queryForList(sql, true);
 
 		sql = "select count(*) from menu";

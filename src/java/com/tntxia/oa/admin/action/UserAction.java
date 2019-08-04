@@ -130,10 +130,12 @@ public class UserAction extends BaseAction{
 		String sex = runtime.getParam("sex");
 		String position = runtime.getParam("workj");
 		String restrain_id = runtime.getParam("restrain_id");
+		String ipbd = runtime.getParam("ipbd");
+		String ip = runtime.getParam("user_ip");
 		
-		String sql = "update username set name_en=?,department_id=?,workj=?,sex=?,restrain_id=? where nameid = ?";
+		String sql = "update username set name_en=?,department_id=?,workj=?,sex=?,restrain_id=?, ipbd=?, user_ip=? where nameid = ?";
 		String id = runtime.getParam("nameid");
-		dbManager.update(sql, new Object[]{name_en,department_id,position,sex,restrain_id, id});
+		dbManager.update(sql, new Object[]{name_en,department_id,position,sex,restrain_id, ipbd, ip, id});
 		return success();
 	}
 	
