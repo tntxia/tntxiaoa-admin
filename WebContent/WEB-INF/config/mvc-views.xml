@@ -10,6 +10,7 @@
 			<stylesheet>css/tntxiaui/style.css</stylesheet>
 			<stylesheet>/static/lib/jxiaui/0.1/css/jxiaui.css</stylesheet>
 			<stylesheet>/static/lib/jxiaui/0.1/css/jxiaui.datepicker.css</stylesheet>
+			<stylesheet>/static/lib/jxiaui/0.1/css/jxiaui.ip-input.css</stylesheet>
 			<stylesheet>/static/lib/jxiaui/0.1/css/jxiaui.datagrid.css</stylesheet>
 			<stylesheet>css/style.css</stylesheet>
 			<stylesheet>/static/lib/ztree/css/zTreeStyle/zTreeStyle.css</stylesheet>
@@ -90,39 +91,5 @@
 			<template>choose.ftl</template>
 		</templates>
 	</mvcView>
-	
-	<mvcView url="market/index.mvc" handler="com.tntxia.oa.market.action.mvc.MarketIndexAction">
-		<title>市场营销</title>
-		<isWholePage>true</isWholePage>
-		<charset>UTF-8</charset>
-		<stylesheets>
-			<stylesheet>css/top.css</stylesheet>
-			<stylesheet>css/font-awesome/style.css</stylesheet>
-			<stylesheet>libs/bootstrap/css/bootstrap.css</stylesheet>
-			<stylesheet>css/cwface.css</stylesheet>
-			<stylesheet>css/tntxiaui/style.css</stylesheet>
-			<stylesheet>css/style.css</stylesheet>
-		</stylesheets>
-		<scripts>
-			<script>/static/lib/jquery/jquery.js</script>
-			<script>js/lib/vue.js</script>
-			<script>js/top.js</script>
-			<script>/static/lib/jxiaui/js/jxiaui.js</script>
-			<script>/static/lib/bootstrap/js/bootstrap.js</script>
-			<script>/static/lib/bootstrap-plus/js/bootstrap-utils.js</script>
-			<script>/static/lib/bootstrap-plus/js/bootstrap.grid.js</script>
-			<script>/static/lib/module_route/module_route.js</script>
-			<script>js/sale/index.js</script>
-		</scripts>
-		<templates>
-			<template>common/oa_common_header_utf8.ftl</template>
-			<template>common/oa_common_leftbar.ftl</template>
-			<template>common/common_container.ftl</template>
-		</templates>
-		<initParams>
-			<leftbar>sale</leftbar>
-		</initParams>
-	</mvcView>
-
 
 </mvcList>

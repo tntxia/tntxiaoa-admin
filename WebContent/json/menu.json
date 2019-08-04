@@ -8,6 +8,9 @@
 			"title":"菜单管理",
 			"url":"#menu"
 		},{
+			"title":"左边菜单管理",
+			"url":"#leftbar"
+		},{
 			"title":"权限组菜单管理",
 			"url":"restrain_menu.html"
 		},{

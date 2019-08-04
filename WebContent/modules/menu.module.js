@@ -76,6 +76,9 @@ exports.init = function(){
 			label:'名称',
 			field:'name'
 		},{
+			label:'关键字名称',
+			field:'key_name'
+		},{
 			label:'URL',
 			field:'url'
 		},{

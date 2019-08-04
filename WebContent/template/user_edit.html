@@ -18,7 +18,7 @@
 			<td>职位</td>
 			<td>
 				<select v-model="form.workj">
-					<option v-for="(p,index) in positionList" :value="p.role_name">{{p.role_name}}</option>
+					<option v-for="(d,index) in departmentList" :value="d.id">{{d.departname}}</option>
 				</select>
 			</td>
 		</tr>
@@ -33,8 +33,14 @@
 			<td><input v-model="form.worktel"></td>
 		</tr>
 		<tr>
-			<td>是否绑定IP</td><td><input type="checkbox" v-model="form.ipbind"></td>
-			<td>IP</td><td><input name="ip" v-model="form.ip"></td>
+			<td>是否绑定IP</td>
+			<td>
+				<jxiaui-checkbox true-value="Y" false-value="N" v-model="form.ipbd"></jxiaui-checkbox>
+			</td>
+			<td>IP</td>
+			<td>
+				<jxiaui-ip-input v-model="form.user_ip">
+			</td>
 		</tr>
 		<tr>
 			<td>权限组</td>

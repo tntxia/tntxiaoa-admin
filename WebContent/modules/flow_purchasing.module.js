@@ -7,11 +7,17 @@ window.modules[name]=module();
 var module=Object.create(null);
 var exports = Object.create(null);
 module.exports=exports;
-exports.template = 'template/template.html';
 exports.init = function(){
 	
+	new Vue({
+		el: '#app',
+		data: {
+			dataset: {
+				url: "flowPurchasing!list.do"
+			}
+		}
+	})
 	
-
 	var grid = new BootstrapGrid({
 		target:$("#datagrid"),
 		url:"flowPurchasing!list.do",

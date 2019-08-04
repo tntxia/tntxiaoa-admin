@@ -20,8 +20,8 @@ exports.init = function(){
 				workj: null,
 				department_id: null,
 				worktel: null,
-				ipbind: null,
-				ip: null
+				ipbd: null,
+				user_ip: null
 			},
 			restrainList: [],
 			positionList: [],
