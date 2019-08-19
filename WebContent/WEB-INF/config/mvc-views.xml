@@ -5,22 +5,12 @@
 		<isWholePage>true</isWholePage>
 		<charset>UTF-8</charset>
 		<stylesheets>
-			<stylesheet>/static/lib/bootstrap/css/bootstrap.css</stylesheet>
-			<stylesheet>/static/lib/bootstrap-plus/css/bootstrap.nav.css</stylesheet>
-			<stylesheet>css/tntxiaui/style.css</stylesheet>
-			<stylesheet>/static/lib/jxiaui/0.1/css/jxiaui.css</stylesheet>
-			<stylesheet>/static/lib/jxiaui/0.1/css/jxiaui.datepicker.css</stylesheet>
-			<stylesheet>/static/lib/jxiaui/0.1/css/jxiaui.ip-input.css</stylesheet>
-			<stylesheet>/static/lib/jxiaui/0.1/css/jxiaui.datagrid.css</stylesheet>
-			<stylesheet>css/style.css</stylesheet>
-			<stylesheet>/static/lib/ztree/css/zTreeStyle/zTreeStyle.css</stylesheet>
-			<stylesheet>css/tntxiaui/style.css</stylesheet>
-			<stylesheet>/static/lib/easy-tree/css/easy-tree.css</stylesheet>
 		</stylesheets>
 		<scripts>
 			<script>/static/lib/jquery/jquery.js</script>
 			<script>/static/lib/ztree/js/jquery.ztree.all.js</script>
 			<script>/static/lib/jquery/jquery.form.js</script>
+			<script>/static/lib/web-install/js/web-install.js</script>
 			<script>js/jxiaui/select.js</script>
 			<script>js/jxiaui/form.js</script>
 			<script>js/jxiaui/getParamMap.js</script>
@@ -37,17 +27,7 @@
 			<script>/static/lib/webuploader/webuploader.js</script>
 			<script>js/ckeditor.js</script>
 			<script>js/menu.js</script>
-			<script>js/bundle.js</script>
-			<script>/static/lib/module_route/module_route.js</script>
-			<script>modules/department.module.js</script>
-			<script>modules/position.module.js</script>
-			<script>modules/config.module.js</script>
-			<script>modules/stamp.module.js</script>
-			<script>modules/logo.module.js</script>
-			<script>modules/banner.module.js</script>
-			<script>modules/contact_template.module.js</script>
-			<script>modules/currency.module.js</script>
-			<script>modules/user.module.js</script>
+			<script>/oa_admin_static/js/index.js</script>
 		</scripts>
 		<templates>
 			<template>index.ftl</template>

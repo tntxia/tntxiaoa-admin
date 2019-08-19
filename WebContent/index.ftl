@@ -1,21 +1,4 @@
 
-<div class="navbar-inverse">
-    <div class="container">
-      <div class="navbar-header">
-        <div class="navbar-title">OA 系统管理 相关链接:</div>
-      </div>
-      <div class="navbar-collapse collapse" role="navigation">
-        <ul class="nav navbar-nav">
-          <li><a href="/tntxiaoa/">OA管理</a></li>
-          <li><a href="https://github.com/tntxia/tntxiaoa-admin">Github</a></li>
-          <li><a href="#config">设置</a></li>
-          <li><a href="javascript:changePassword()">修改密码</a></li>
-          <li><a href="javascript:logout()">退出登陆</a></li>
-        </ul>
-      </div>
-    </div>
-</div>
-
 <div style="clear:both;"></div>
 
 <div class="bottom-div">
@@ -52,8 +35,6 @@
 
 					</div>
 				</div>
-
-
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
