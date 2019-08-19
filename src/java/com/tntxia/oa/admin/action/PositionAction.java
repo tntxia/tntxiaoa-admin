@@ -19,7 +19,6 @@ public class PositionAction extends BaseAction {
 		List list = dbManager.queryForList(sql, true);
 		int count = dbManager.queryForInt("select count(*) from role");
 		return this.getPagingResult(list, pageBean, count);
-		
 	}
 	
 	@SuppressWarnings("rawtypes")

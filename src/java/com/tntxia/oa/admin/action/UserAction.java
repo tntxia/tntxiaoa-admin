@@ -39,32 +39,30 @@ public class UserAction extends BaseAction{
 	 */
 	@SuppressWarnings("rawtypes")
 	public Map<String,Object> list(WebRuntime runtime) throws Exception{
-		Map<String, Object> res = new HashMap<String, Object>();
 		
-		String sql = "select * from username where 1=1 ";
+		String sql = "select top " + runtime.getPageBean().getTop() + " * from username";
+		String sqlWhere = " where 1=1 ";
+		String sqlOrderBy = " order by nameid desc";
 		
 		List<Object> params = new ArrayList<Object>();
 		
 		String deptId = runtime.getParam("deptId");
 		if (StringUtils.isNotEmpty(deptId)) {
-			sql += " and department_id = ?";
+			sqlWhere += " and department_id = ?";
 			params.add(deptId);
 		}
 		String name = runtime.getParam("name");
 		if (StringUtils.isNotEmpty(name)) {
-			sql += " and name like ?";
+			sqlWhere += " and name like ?";
 			params.add("%" + name + "%");
 		}
 		
-		List rows = dbManager.queryForList(sql, params, true);
-		for(int i=0;i<rows.size();i++) {
-			Map m = (Map) rows.get(i);
-			Integer department_id = (Integer) m.get("department_id") ;
-			String departmentName = departmentService.getDepartmentName(department_id);
-			m.put("departmentName", departmentName);
-		}
-		res.put("rows", rows);
-		return res;
+		List list = dbManager.queryForList(sql + sqlWhere + sqlOrderBy, params, true);
+		
+		sql = "select count(*) from username ";
+		int count = dbManager.getCount(sql + sqlWhere);
+		
+		return this.getPagingResult(list, runtime, count);
 	}
 	
 	/**
@@ -90,13 +88,14 @@ public class UserAction extends BaseAction{
 		String sex = runtime.getParam("sex");
 		
 		String restrain_id = runtime.getParam("restrain_id");
-		String department_id = runtime.getParam("department_id");
+		String departmentId = runtime.getParam("department_id");
+		String departmentName = departmentService.getDepartmentName(Integer.parseInt(departmentId));
 		String worktel = runtime.getParam("worktel");
 		String ipbd = runtime.getParam("ipbd");
 		String user_ip = runtime.getParam("user_ip");
 		
-		String sql = "insert into username(name,name_en,password,sex,restrain_id,department_id,worktel,ipbd,user_ip) values(?,?,?,?,?,?,?,?,?)";
-		dbManager.update(sql,new Object[]{name,name_en,password,sex,restrain_id,department_id,worktel,ipbd,user_ip});
+		String sql = "insert into username(name,name_en,yjxs,password,sex,restrain_id,department_id,worktel,ipbd,user_ip) values(?,?,?,?,?,?,?,?,?,?)";
+		dbManager.update(sql,new Object[]{name,name_en,departmentName,password,sex,restrain_id,departmentId,worktel,ipbd,user_ip});
 		
 		return this.success();
 	}
@@ -126,16 +125,17 @@ public class UserAction extends BaseAction{
 	public Map<String,Object> update(WebRuntime runtime) throws Exception{
 		
 		String name_en = runtime.getParam("name_en");
-		String department_id = runtime.getParam("department_id");
+		String departmentId = runtime.getParam("department_id");
+		String departmentName = departmentService.getDepartmentName(Integer.parseInt(departmentId));
 		String sex = runtime.getParam("sex");
 		String position = runtime.getParam("workj");
 		String restrain_id = runtime.getParam("restrain_id");
 		String ipbd = runtime.getParam("ipbd");
 		String ip = runtime.getParam("user_ip");
 		
-		String sql = "update username set name_en=?,department_id=?,workj=?,sex=?,restrain_id=?, ipbd=?, user_ip=? where nameid = ?";
+		String sql = "update username set name_en=?,department_id=?,yjxs=?,workj=?,sex=?,restrain_id=?, ipbd=?, user_ip=? where nameid = ?";
 		String id = runtime.getParam("nameid");
-		dbManager.update(sql, new Object[]{name_en,department_id,position,sex,restrain_id, ipbd, ip, id});
+		dbManager.update(sql, new Object[]{name_en,departmentId,departmentName, position,sex,restrain_id, ipbd, ip, id});
 		return success();
 	}
 	
