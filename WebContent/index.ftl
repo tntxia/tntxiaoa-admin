@@ -1,11 +1,3 @@
-
-<div style="clear:both;"></div>
-
-<div class="bottom-div">
-	<div class="leftbar"></div>
-	<div id="mainPage" class="main-page"></div>
-</div> 
-
 <div class="modal fade" tabindex="-1" role="dialog" id="changePassModal">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
