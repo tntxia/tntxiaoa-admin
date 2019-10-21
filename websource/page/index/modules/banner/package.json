@@ -1,0 +1,10 @@
+{
+	"name":"banner",
+	"jshandler":"./common/jshandler-crud.js",
+	"jshandlerData":{
+		"cols":[]
+	},
+	"module-init-js":"banner.js",
+	"template":"banner.html",
+	"target":"../WebContent/modules/banner.module.js"
+}

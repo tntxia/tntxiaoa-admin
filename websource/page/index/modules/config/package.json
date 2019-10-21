@@ -1,0 +1,10 @@
+{
+	"name":"config",
+	"jshandler":"./common/jshandler-crud.js",
+	"jshandlerData":{
+		"cols":[]
+	},
+	"module-init-js":"config.js",
+	"template":"config.html",
+	"target":"../WebContent/modules/config.module.js"
+}

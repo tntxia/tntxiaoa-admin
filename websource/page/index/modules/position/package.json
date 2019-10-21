@@ -1,0 +1,10 @@
+{
+	"name":"position",
+	"jshandler":"./common/jshandler-crud.js",
+	"jshandlerData":{
+		"cols":[]
+	},
+	"module-init-js":"position.js",
+	"template":"position.html",
+	"target":"../WebContent/modules/position.module.js"
+}

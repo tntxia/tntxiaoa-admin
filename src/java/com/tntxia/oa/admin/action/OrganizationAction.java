@@ -53,9 +53,10 @@ public class OrganizationAction extends BaseAction{
 		String id = runtime.getParam("id");
 		String name = runtime.getParam("departname");
 		String leader = runtime.getParam("leader");
+		String remark = runtime.getParam("remark");
 		
-		String sql = "update department set departname = ? , leader=? where id=?";
-		dbManager.update(sql, new Object[]{name,leader,id});
+		String sql = "update department set departname = ? , leader=?, remark=? where id=?";
+		dbManager.update(sql, new Object[]{name,leader, remark,id});
 		
 		return this.success();
 		
@@ -112,8 +113,19 @@ public class OrganizationAction extends BaseAction{
 			Integer parentId = this.getParentId(targetId);
 			dbManager.update(sql, new Object[] {parentId,id});
 		}
-		return this.success();
-		
+		return this.success();	
+	}
+	
+	/**
+	 * 部门详情
+	 * @param runtime
+	 * @return
+	 * @throws Exception
+	 */
+	public Map<String,Object> detail(WebRuntime runtime) throws Exception {
+		String id = runtime.getParam("id");
+		String sql = "select * from department where id = ?";
+		return dbManager.queryForMap(sql,new Object[] {id}, true);
 	}
 
 }

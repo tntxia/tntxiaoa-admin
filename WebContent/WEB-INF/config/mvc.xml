@@ -13,6 +13,8 @@
 		<action url="app.do">com.tntxia.oa.admin.action.AppAction</action>
 		<action name="showImage">com.tntxia.oa.admin.action.ShowImageAction</action>
 		
+		<action url="leftbar.do">com.tntxia.oa.admin.action.LeftbarAction</action>
+		
 		<action name="systeminfo">com.tntxia.oa.admin.action.SystemInfoAction</action>
 		<action url="organization.do">com.tntxia.oa.admin.action.OrganizationAction</action>
 		<action url="user.do">com.tntxia.oa.admin.action.UserAction</action>

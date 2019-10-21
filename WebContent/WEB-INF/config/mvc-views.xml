@@ -4,13 +4,14 @@
 		<title>OA管理</title>
 		<isWholePage>true</isWholePage>
 		<charset>UTF-8</charset>
-		<stylesheets>
-		</stylesheets>
 		<scripts>
 			<script>/static/lib/jquery/jquery.js</script>
 			<script>/static/lib/ztree/js/jquery.ztree.all.js</script>
 			<script>/static/lib/jquery/jquery.form.js</script>
-			<script>/static/lib/web-install/js/web-install.js</script>
+			<script>
+				<src>/static/lib/web-install/js/web-install.js</src>
+				<resource-path>/oa_admin_static</resource-path>
+			</script>
 			<script>js/jxiaui/select.js</script>
 			<script>js/jxiaui/form.js</script>
 			<script>js/jxiaui/getParamMap.js</script>
@@ -27,7 +28,6 @@
 			<script>/static/lib/webuploader/webuploader.js</script>
 			<script>js/ckeditor.js</script>
 			<script>js/menu.js</script>
-			<script>/oa_admin_static/js/index.js</script>
 		</scripts>
 		<templates>
 			<template>index.ftl</template>

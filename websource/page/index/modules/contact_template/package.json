@@ -1,0 +1,7 @@
+{
+	"jshandler":"./common/jshandler-crud.js",
+	"jshandlerData":{
+		"cols":[]
+	},
+	"target":"../WebContent/modules/config.module.js"
+}

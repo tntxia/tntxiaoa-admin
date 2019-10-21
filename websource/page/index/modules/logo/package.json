@@ -1,0 +1,10 @@
+{
+	"name":"logo",
+	"jshandler":"./common/jshandler-crud.js",
+	"jshandlerData":{
+		"cols":[]
+	},
+	"module-init-js":"logo.js",
+	"template":"logo.html",
+	"target":"../WebContent/modules/logo.module.js"
+}

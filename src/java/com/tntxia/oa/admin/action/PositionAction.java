@@ -23,11 +23,42 @@ public class PositionAction extends BaseAction {
 	
 	@SuppressWarnings("rawtypes")
 	public List listAll(WebRuntime runtime) throws Exception{
-		
 		String sql = "select * from role";
 		List list = dbManager.queryForList(sql, true);
 		return list;
-		
 	}
-
+	
+	public Map<String, Object> add(WebRuntime runtime) throws Exception{
+		String role_name=runtime.getParam("role_name");
+		String remark=runtime.getParam("remark");
+		
+		String sql="insert into role(role_name,remark,role_date) values(?,?,getdate())";
+		dbManager.update(sql, new Object[] {role_name, remark});
+		return this.success();
+	}
+	
+	public Map<String, Object> detail(WebRuntime runtime) throws Exception{
+		String id = runtime.getParam("id");
+		String sql="select * from role where id = ?";
+		return dbManager.queryForMap(sql, new Object[] {id}, true);
+	}
+	
+	public Map<String, Object> update(WebRuntime runtime) throws Exception{
+		String id = runtime.getParam("id");
+		String role_name=runtime.getParam("role_name");
+		String remark=runtime.getParam("remark");
+		
+		String sql="update role set role_name=?,remark=? where id = ?";
+		dbManager.update(sql, new Object[] {role_name, remark, id});
+		return this.success();
+	}
+	
+	public Map<String, Object> del(WebRuntime runtime) throws Exception{
+		String id = runtime.getParam("id");
+		
+		String sql="delete from role where id = ?";
+		dbManager.update(sql, new Object[] {id});
+		return this.success();
+	}
+	
 }

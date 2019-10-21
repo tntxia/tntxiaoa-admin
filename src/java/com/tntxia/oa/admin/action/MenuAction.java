@@ -1,32 +1,26 @@
 package com.tntxia.oa.admin.action;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.CellType;
 
+import com.alibaba.fastjson.JSON;
 import com.tntxia.dbmanager.DBManager;
-import com.tntxia.excel.ExcelData;
-import com.tntxia.excel.ExcelRow;
-import com.tntxia.excel.ExcelUtils;
 import com.tntxia.httptrans.HttpTransfer;
 import com.tntxia.httptrans.HttpTransferFactory;
+import com.tntxia.sqlexecutor.Transaction;
 import com.tntxia.web.mvc.BaseAction;
 import com.tntxia.web.mvc.WebRuntime;
-import com.tntxia.web.mvc.entity.MultipartForm;
+import com.tntxia.web.mvc.annotation.Param;
+import com.tntxia.web.util.UUIDUtils;
 
 public class MenuAction extends BaseAction {
 
@@ -46,14 +40,12 @@ public class MenuAction extends BaseAction {
 
 	}
 
-	public Map<String, Object> add(WebRuntime runtime) throws Exception {
+	public Map<String, Object> add(@Param("pid") String pid, 
+			@Param("name") String name, @Param("url") String url,
+			@Param("key_name") String key_name, @Param("order_no") String order_no) throws Exception {
 
-		String name = runtime.getParam("name");
-		String url = runtime.getParam("url");
-		String order_no = runtime.getParam("order_no");
-
-		String sql = "insert into menu (name,url,order_no) values(?,?,?)";
-		dbManager.update(sql, new Object[] { name, url, order_no });
+		String sql = "insert into menu (name,url,key_name, order_no,pid) values(?,?,?,?,?)";
+		dbManager.update(sql, new Object[] { name, url, key_name,order_no,pid });
 
 		return this.success();
 
@@ -71,92 +63,72 @@ public class MenuAction extends BaseAction {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public Map<String, Object> list(WebRuntime runtime) throws Exception {
+	public List list(@Param("pid") String pid, WebRuntime runtime) throws Exception {
 
-		String sql = "select * from menu order by order_no";
+		String sql = "select * from menu order  by order_no";
 		List list = dbManager.queryForList(sql, true);
-
-		sql = "select count(*) from menu";
-		int count = dbManager.getCount(sql);
-
-		return this.getPagingResult(list, runtime, count);
+		return list;
 	}
 
 	@SuppressWarnings("rawtypes")
 	public Map<String, Object> export(WebRuntime runtime) throws Exception {
 		String sql = "select * from menu";
 		List list = dbManager.queryForList(sql, true);
-		String[] cols = new String[] { "序号", "名称", "URL", "排序" };
-
-		ExcelData data = new ExcelData();
-
-		for (int i = 0; i < list.size(); i++) {
-			Map map = (Map) list.get(i);
-			ExcelRow row = new ExcelRow();
-			row.add(i + 1);
-			row.add(map.get("name"));
-			row.add(map.get("url"));
-			row.add(map.get("order_no"));
-			data.add(row);
+		String content = JSON.toJSONString(list);
+		
+		String tempDirPath = runtime.getRealPath("/WEB-INF/temp");
+		File tempDir = new File(tempDirPath);
+		tempDir.mkdirs();
+		String uuid = UUIDUtils.getUUID();
+		String tempPath = tempDir.getAbsolutePath() + File.separatorChar + uuid + ".json";
+		File file = new File(tempPath);
+		if(!file.exists()){
+			file.createNewFile();
 		}
-
-		String excelPath = ExcelUtils.makeCommonExcel("菜单", cols, data);
+		FileWriter fileWriter = new FileWriter(file.getAbsoluteFile());
+		BufferedWriter bw = new BufferedWriter(fileWriter);
+		bw.write(content);
+		bw.close();
+		System.out.println("finish");
+		
 
 		HttpTransfer trans = HttpTransferFactory.generate("file_center");
-		Map<String, Object> transResult = trans.uploadFile("file!upload", excelPath, new HashMap<String, String>());
-		String uuid = (String) transResult.get("uuid");
+		Map<String, Object> transResult = trans.uploadFile("file!upload", tempPath, new HashMap<String, String>());
+		uuid = (String) transResult.get("uuid");
 		return this.success("uuid", uuid);
 
 	}
 
-	private Object getCellValue(HSSFRow row, int i) {
-		HSSFCell cell = row.getCell(i);
-		if (cell == null) {
-			return null;
-		}
-		if (cell.getCellTypeEnum() == CellType.NUMERIC) {
-			return cell.getNumericCellValue();
-		}
-		return cell.getStringCellValue();
-	}
-
-	public Map<String, Object> importMenu(WebRuntime runtime) throws Exception {
-		MultipartForm form = runtime.getMultipartForm();
-		List<FileItem> fileItemList = form.getFileItemList();
-		String uploadTempPath = "D:\\temp_upload";
-		File uploadTempDir = new File(uploadTempPath);
-		uploadTempDir.mkdirs();
-		for (FileItem item : fileItemList) {
-
-			String fileName = item.getName();
-			String fileExt = FilenameUtils.getExtension(fileName);
-			String uuid = UUID.randomUUID().toString();
-			String savePath = uploadTempDir.getAbsolutePath() + File.separator + uuid + "." + fileExt;
-			File file = new File(savePath);
-			item.write(file);
-
-			HSSFWorkbook workbook = null;
-
-			workbook = new HSSFWorkbook(new FileInputStream(savePath));
-			HSSFSheet sheet = workbook.getSheetAt(0);
-			int amount = sheet.getLastRowNum();
-
-			for (int r = 2; r <= amount; r++) {
-
-				HSSFRow row = sheet.getRow(r);
-
-				Object name = this.getCellValue(row, 1);
-				Object url = this.getCellValue(row, 2);
-				Object orderNo = ((Double) this.getCellValue(row, 3)).intValue();
-
-				String sql = "insert into menu(name,url,order_no) values(?,?,?)";
-
-				dbManager.executeUpdate(sql, new Object[] { name, url, orderNo });
-
+	@SuppressWarnings("rawtypes")
+	public Map<String, Object> importMenu(@Param("file") FileItem fileItem,
+			WebRuntime runtime) throws Exception {
+		
+		String content = fileItem.getString("UTF-8");
+		List list = (List) JSON.parse(content);
+		
+		Transaction trans = this.getTransaction("oa_back");
+		try {
+			trans.update("delete from menu");
+			for(int i=0;i<list.size();i++) {
+				Map map = (Map)list.get(i);
+				Integer id = (Integer) map.get("id");
+				String name = (String) map.get("name");
+				String key_name = (String) map.get("key_name");
+				String url = (String) map.get("url");
+				Integer order_no = (Integer) map.get("order_no");
+				Integer pid = (Integer) map.get("pid");
+				String sql = "insert into menu(id, name, key_name, url, order_no, pid) values(?, ?, ?, ?, ?, ?)";
+				trans.update(sql, new Object[] {id, name, key_name, url, order_no, pid});
 			}
-			workbook.close();
-
+			trans.commit();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			trans.rollback();
+		}finally {
+			trans.close();
 		}
+		
+		System.out.println(list.size());
 
 		return this.success();
 

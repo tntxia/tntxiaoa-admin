@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<leftbar>
+	<currentBarIndex>7</currentBarIndex>
+	<bars>
+		<bar name="合同管理" restrain="subzt">
+			<button url="#sale/list_draft">新增合同</button>
+			<button url="#sale/list_approving">待审合同</button>
+			<button url="#sale/list_approved">已审合同</button>
+			<button url="#sale/list_deleted"
+				restrain="view_sale_del">已删合同</button>
+		</bar>
+		<bar name="销售跟进">
+			<button url="#sale/product_list"
+				restrain="r_xscp_zt">产品列表</button>
+			<button url="#sale/inquiry_list" restrain="r_cus_xj_zt">询价管理</button>
+			<button url="#sale/quote_list_draft" restrain="quotezt">报价管理</button>
+		</bar>
+		<bar name="项目管理" restrain="xmzt">
+			<button url="#sale/project_list_executing">项目执行中</button>
+			<button url="#sale/project_list_finish">项目完成</button>
+		</bar>
+		<bar name="合作伙伴" restrain="hzzt">
+			<button url="#sale/partner_list">合作伙伴</button>
+		</bar>
+		<bar name="客户管理">
+			<button url="#sale/client_list_potential"
+				restrain="qzzt">潜在客户</button>
+			<button url="#sale/client_list"
+				restrain="xhzt">现有客户</button>
+			<button url="#sale/client_contact_list"
+				restrain="linkzt">联系人</button>
+			<button url="#sale_client_request_list"
+				restrain="serverzt">客户服务</button>
+			<button url="xclient/shift.mvc" restrain="custzyzt">资源转移</button>
+		</bar>
+		<bar name="客户投诉" restrain="tszt">
+			<button url="sale/index.mvc#complain_draft_list">登记投诉</button>
+			<button url="server/khts/approving.mvc">处理投诉</button>
+			<button url="sale/index.mvc#complain_approved_list">领导批示</button>
+			<button url="sale/index.mvc#complain_finish_list">处理结果</button>
+			<button url="server/khts/all.mvc">投诉统计</button>
+		</bar>
+		<bar name="退货管理" restrain="thzt">
+			<button url="server/thgl/list.mvc" ico="images/left/sale/th01.gif">新增退货</button>
+			<button url="server/thgl/listApproving.mvc" ico="images/left/sale/th02.gif">待审退货</button>
+			<button url="server/thgl/listApproved.mvc" ico="images/left/sale/th03.gif">已审退货</button>
+			<button url="server/thgl/listDeleted.mvc" ico="images/left/sale/th04.jpg">已删退货</button>
+		</bar>
+		<bar name="业务报表">
+			<button url="#sale_work_plan_month">月工作计划</button>
+			<button url="#sale_work_report_daily">日报表</button>
+			<button url="#sale_work_report_weekly">周工作报表</button>
+			<button url="#sale_work_report_monthly">月工作报表</button>
+		</bar>
+		<bar name="样品管理" restrain="r_sam_zt">
+			<button url="#sale/sample_list_draft">新增样品</button>
+			<button url="#sale/sample_list_approving">待审样品</button>
+			<button url="sale/ypgl/auditedList.mvc">已审样品</button>
+			<button url="sale/index.mvc#sale_sample_to_return_list">待归还</button>
+			<button url="sale/ypgl/returnList.mvc">已归还</button>
+			<button url="sale/ypgl/allList.mvc">所有样品</button>
+		</bar>
+	</bars>
+
+</leftbar>

@@ -60,7 +60,7 @@ public class UserAction extends BaseAction{
 		List list = dbManager.queryForList(sql + sqlWhere + sqlOrderBy, params, true);
 		
 		sql = "select count(*) from username ";
-		int count = dbManager.getCount(sql + sqlWhere);
+		int count = dbManager.getCount(sql + sqlWhere, params);
 		
 		return this.getPagingResult(list, runtime, count);
 	}
@@ -76,7 +76,6 @@ public class UserAction extends BaseAction{
 	public List listAll(WebRuntime runtime) throws Exception{
 		
 		List list = dbManager.queryForList("select * from username", true);
-		
 		return list;
 	}
 	
@@ -90,12 +89,14 @@ public class UserAction extends BaseAction{
 		String restrain_id = runtime.getParam("restrain_id");
 		String departmentId = runtime.getParam("department_id");
 		String departmentName = departmentService.getDepartmentName(Integer.parseInt(departmentId));
+		
+		String workj = runtime.getParam("workj");
 		String worktel = runtime.getParam("worktel");
 		String ipbd = runtime.getParam("ipbd");
 		String user_ip = runtime.getParam("user_ip");
 		
-		String sql = "insert into username(name,name_en,yjxs,password,sex,restrain_id,department_id,worktel,ipbd,user_ip) values(?,?,?,?,?,?,?,?,?,?)";
-		dbManager.update(sql,new Object[]{name,name_en,departmentName,password,sex,restrain_id,departmentId,worktel,ipbd,user_ip});
+		String sql = "insert into username(name,name_en,department_name,yjxs,workj,password,sex,restrain_id,department_id,worktel,ipbd,user_ip) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		dbManager.update(sql,new Object[]{name,name_en,departmentName,departmentName,workj,password,sex,restrain_id,departmentId,worktel,ipbd,user_ip});
 		
 		return this.success();
 	}
@@ -133,9 +134,9 @@ public class UserAction extends BaseAction{
 		String ipbd = runtime.getParam("ipbd");
 		String ip = runtime.getParam("user_ip");
 		
-		String sql = "update username set name_en=?,department_id=?,yjxs=?,workj=?,sex=?,restrain_id=?, ipbd=?, user_ip=? where nameid = ?";
+		String sql = "update username set name_en=?,department_id=?,department_name=?,yjxs=?,workj=?,sex=?,restrain_id=?, ipbd=?, user_ip=? where nameid = ?";
 		String id = runtime.getParam("nameid");
-		dbManager.update(sql, new Object[]{name_en,departmentId,departmentName, position,sex,restrain_id, ipbd, ip, id});
+		dbManager.update(sql, new Object[]{name_en,departmentId,departmentName,departmentName, position,sex,restrain_id, ipbd, ip, id});
 		return success();
 	}
 	
