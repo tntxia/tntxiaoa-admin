@@ -65,8 +65,9 @@ public class RestrainMenuAction extends BaseAction{
 		for(int i=0;i<menus.size();i++) {
 			Map map = (Map) menus.get(i);
 			ZTreeNode treeNode = new ZTreeNode();
-			treeNode.setId(String.valueOf((Integer)map.get("id")));
+			treeNode.setId((String)map.get("id"));
 			treeNode.setName((String) map.get("name"));
+			treeNode.setPid((String) map.get("pid"));
 			res.add(treeNode);
 		}
 		
