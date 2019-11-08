@@ -44,8 +44,9 @@ public class MenuAction extends BaseAction {
 			@Param("name") String name, @Param("url") String url,
 			@Param("key_name") String key_name, @Param("order_no") String order_no) throws Exception {
 
-		String sql = "insert into menu (name,url,key_name, order_no,pid) values(?,?,?,?,?)";
-		dbManager.update(sql, new Object[] { name, url, key_name,order_no,pid });
+		String id = UUIDUtils.getUUID();
+		String sql = "insert into menu (id, name,url,key_name, order_no,pid) values(?, ?,?,?,?,?)";
+		dbManager.update(sql, new Object[] {id, name, url, key_name,order_no,pid });
 
 		return this.success();
 
