@@ -112,12 +112,12 @@ public class MenuAction extends BaseAction {
 			trans.update("delete from menu");
 			for(int i=0;i<list.size();i++) {
 				Map map = (Map)list.get(i);
-				Integer id = (Integer) map.get("id");
+				String id = (String) map.get("id");
 				String name = (String) map.get("name");
 				String key_name = (String) map.get("key_name");
 				String url = (String) map.get("url");
 				Integer order_no = (Integer) map.get("order_no");
-				Integer pid = (Integer) map.get("pid");
+				String pid = (String) map.get("pid");
 				String sql = "insert into menu(id, name, key_name, url, order_no, pid) values(?, ?, ?, ?, ?, ?)";
 				trans.update(sql, new Object[] {id, name, key_name, url, order_no, pid});
 			}
