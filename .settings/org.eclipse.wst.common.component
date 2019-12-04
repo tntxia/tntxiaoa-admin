@@ -4,9 +4,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/config"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test"/>
-        <dependent-module archiveName="tntxiawebmvc2.war" deploy-path="/WEB-INF/lib" handle="module:/resource/tntxiawebmvc2/tntxiawebmvc2">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="admin"/>
         <property name="java-output-path" value="/admin/build/classes"/>
     </wb-module>

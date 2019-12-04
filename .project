@@ -3,7 +3,6 @@
 	<name>admin</name>
 	<comment></comment>
 	<projects>
-		<project>tntxiawebmvc2</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

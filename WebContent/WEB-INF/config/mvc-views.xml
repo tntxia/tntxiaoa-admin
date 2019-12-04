@@ -5,26 +5,10 @@
 		<isWholePage>true</isWholePage>
 		<charset>UTF-8</charset>
 		<scripts>
-			<script>/static/lib/jquery/jquery.form.js</script>
 			<script>
 				<src>/static/lib/web-install/js/web-install.js</src>
 				<resource-path>/oa_admin_static</resource-path>
 			</script>
-			<script>js/jxiaui/select.js</script>
-			<script>js/jxiaui/form.js</script>
-			<script>js/jxiaui/getParamMap.js</script>
-			<script>/static/lib/vue/vue.js</script>
-			<script>/static/lib/jxiaui/0.1/dist/jxiaui.js</script>
-			<script>lib/vue-manager.js</script>
-			<script>/static/lib/jxiaui/js/http.js</script>
-			<script>/static/lib/jxiaui/js/datepick.js</script>
-			<script>/static/lib/jxiaui/js/jxiaui.js</script>
-			<script>/static/lib/bootstrap/js/bootstrap.js</script>
-			<script>/static/lib/bootstrap-plus/js/bootstrap-utils.js</script>
-			<script>/static/lib/bootstrap-plus/js/bootstrap.grid.js</script>
-			<script>/static/lib/webuploader/webuploader.js</script>
-			<script>js/ckeditor.js</script>
-			<script>js/menu.js</script>
 		</scripts>
 		<templates>
 			<template>index.ftl</template>

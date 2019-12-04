@@ -7,6 +7,7 @@ import com.tntxia.dbmanager.DBManager;
 import com.tntxia.web.mvc.BaseAction;
 import com.tntxia.web.mvc.PageBean;
 import com.tntxia.web.mvc.WebRuntime;
+import com.tntxia.web.mvc.annotation.Param;
 
 public class FlowPurchasingAction extends BaseAction{
 	
@@ -19,6 +20,13 @@ public class FlowPurchasingAction extends BaseAction{
 		List list = dbManager.queryForList("select top "+pageBean.getTop()+" * from cgsp", true);
 		int totalAmount = dbManager.queryForInt("select count(*) from cgsp");
 		return this.getPagingResult(list, pageBean, totalAmount);
+		
+	}
+	
+	public Map<String,Object> detail(@Param("id") String id) throws Exception{
+		String sql = "select * from cgsp where id = ?";
+		Map<String,Object> data = dbManager.queryForMap(sql, new Object[] {id}, true);
+		return this.success("data", data);
 		
 	}
 	
